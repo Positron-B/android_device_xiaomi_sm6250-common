@@ -20,6 +20,7 @@
 #include <linux/input.h>
 
 namespace {
+
 int open_ts_input() {
     int fd = -1;
     DIR* dir = opendir("/dev/input");
@@ -51,6 +52,7 @@ int open_ts_input() {
 
     return fd;
 }
+
 }  // anonymous namespace
 
 namespace aidl {
@@ -90,8 +92,8 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
             ev.value = enabled ? kInputEventWakeupModeOn : kInputEventWakeupModeOff;
             write(fd, &ev, sizeof(ev));
             close(fd);
-        }
             return true;
+        }
         default:
             return false;
     }
